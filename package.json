@@ -64,6 +64,11 @@
   "license": "Apache 2.0",
   "overrides": {
     "@babel/traverse": ">=8.0.0-alpha.4",
-    "@hapi/hoek": ">=9.0.3"
+    "@hapi/hoek": ">=9.0.3",
+    "form-data": ">=4.0.4",
+    "handlebars": ">=4.3.0",
+    "json-schema": ">=0.4.0",
+    "lodash": ">=4.17.14",
+    "minimist": ">=1.2.6"
   }
 }
