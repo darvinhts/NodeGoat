@@ -70,27 +70,7 @@ const AllocationsDAO = function(db){
                 const parsedThreshold = parseInt(threshold, 10);
                 
                 if (parsedThreshold >= 0 && parsedThreshold <= 99) {
-                    return {$where: `this.userId == ${parsedUserId} && this.stocks > ${parsedThreshold}`};
-                }
-                throw `The user supplied threshold: ${parsedThreshold} was not valid.`;
-                */
-                return {
-                    $where: `this.userId == ${parsedUserId} && this.stocks > '${threshold}'`
-                };
-            }
-            return {
-                userId: parsedUserId
-            };
-        };
-
-        allocationsCol.find(searchCriteria()).toArray((err, allocations) => {
-            if (err) return callback(err, null);
-            if (!allocations.length) return callback("ERROR: No allocations found for the user", null);
-
-            let doneCounter = 0;
-            const userAllocations = [];
-
-            allocations.forEach( alloc => {
+                    return { $where: function() { return this.userId == parsedUserId && this.stocks > parseInt(threshold, 10); } };
                 userDAO.getUserById(alloc.userId, (err, user) => {
                     if (err) return callback(err, null);
 
